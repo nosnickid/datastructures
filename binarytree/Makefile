@@ -7,23 +7,25 @@ DEPENDS=$(SOURCES:.cpp=.dep)
 EXE=$(BIN)/binary_tree
 INCLUDE=-I../3rdparty/cppunit-1.12.1/include
 LIBS=../3rdparty/cppunit-1.12.1/src/cppunit/.libs/libcppunit.a
-CXXFLAGS=-Wall $(INCLUDE) $(LIBS)
+CXXFLAGS=-Wall $(INCLUDE) 
 
 CXX=g++
+
+.PHONY: clean all default
+
+all: $(EXE)
+
+$(EXE): $(OBJECTS)
+	$(CXX) $(OBJECTS) $(LIBS) -o $@
 
 .cpp.o:
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 %.dep: %.cpp
-	$(CXX) -M $(CXXFLAGS) $< > $@
+	$(CXX) $(CXXFLAGS) -MM -MT $(<:.cpp=.o) $<  > $@
 
 clean:
 	-rm -f $(OBJECTS) $(EXE) $(DEPENDS)
     
-
-all: $(OBJECTS) $(EXE)
-
-$(EXE): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LIBS) -o $@
 
 -include $(DEPENDS)
