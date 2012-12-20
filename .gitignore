@@ -1,3 +1,7 @@
 *.o
 bin
 *.dep
+*.lo
+.libs
+.deps
+3rdparty/cppunit-1.12.1
