@@ -1,15 +1,13 @@
 default: all
 BIN=bin
-SOURCES=src/main.cpp
+SOURCES=src/test/binary_tree_test.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 DEPENDS=$(SOURCES:.cpp=.dep)
 
 EXE=$(BIN)/binary_tree
-
-INCLUDE=
-LIBS=
-
-CXXFLAGS=$(INCLUDE) $(LIBS)
+INCLUDE=-I../3rdparty/cppunit-1.12.1/include
+LIBS=../3rdparty/cppunit-1.12.1/src/cppunit/.libs/libcppunit.a
+CXXFLAGS=-Wall $(INCLUDE) $(LIBS)
 
 CXX=g++
 
@@ -26,6 +24,6 @@ clean:
 all: $(OBJECTS) $(EXE)
 
 $(EXE): $(OBJECTS)
-	$(CXX) $(LIBS) $(OBJECTS) -o $@
+	$(CXX) $(OBJECTS) $(LIBS) -o $@
 
 -include $(DEPENDS)
