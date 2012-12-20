@@ -15,6 +15,9 @@ CXX=g++
 
 all: $(EXE)
 
+run: $(EXE)
+	$(EXE)
+
 $(EXE): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LIBS) -o $@
 
